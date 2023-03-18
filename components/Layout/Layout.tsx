@@ -14,7 +14,8 @@ const Layout = ({ meta, children }: LayoutProps) => {
         }
     };
 
-    const scrollToTop = () => {
+    const scrollToTop = (e: { stopPropagation: () => void }) => {
+        e.stopPropagation();
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -46,7 +47,7 @@ const Layout = ({ meta, children }: LayoutProps) => {
             <main>
                 {children}
                 <button
-                    className={`fixed z-0 bottom-0 right-0 cursor-pointer p-5 ${isVisible ? 'opacity-100' : 'opacity-0'
+                    className={`fixed z-30 bottom-0 right-0 cursor-pointer p-5 ${isVisible ? 'opacity-100' : 'opacity-0'
                         } transition-opacity duration-300 bg-blue-500 text-white rounded`}
                     onClick={scrollToTop}
                 >

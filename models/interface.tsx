@@ -55,4 +55,14 @@ interface Meta {
     image: string;
 }
 
+export interface SearchProps {
+    searchTerm: string;
+    setSearchTerm: (searchTerm: string) => void;
+    hasResults: boolean;
+}
 
+export interface LazyImageProps {
+    src: string;
+    alt: string;
+    className?: string;
+  }

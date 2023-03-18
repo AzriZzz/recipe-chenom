@@ -15,7 +15,6 @@ async function getChannelId(youtube: youtube_v3.Youtube): Promise<string | null>
   return response.data.items?.[0]?.id?.channelId || null;
 }
 
-
 async function getVideos(channelId: string): Promise<youtube_v3.Schema$SearchResult[]> {
   const youtube = google.youtube({
     version: 'v3',
