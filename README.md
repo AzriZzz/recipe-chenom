@@ -1,32 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe @CheNom
+
+A web application showcasing a collection of cooking videos created by the YouTuber CheNom. The application enables users to browse, search, and bookmark their favorite dishes.
 
 ## Getting Started
 
-First, run the development server:
+These instructions will guide you through setting up and running the project on your local machine for development and testing purposes.
 
-```bash
+### Prerequisites
+
+Ensure the following software and tools are installed:
+
+- Node.js (v16.16.0 or higher)
+- npm (v6.14.17 or higher)
+- Next.js (v13 or higher)
+
+### Installation
+
+Follow these steps to set up and run the project locally:
+
+1. Clone the repository:
+git clone https://github.com/your-username/recipe-chenom.git
+
+
+2. Navigate to the project folder:
+cd recipe-chenom
+
+
+3. Install the dependencies:
+npm install
+
+
+4. Start the development server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Features
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The main features of the project include:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Feature 1: Displaying all dishes from CheNom's YouTube channel
+- Feature 2: Implementing a search functionality for dishes
+- Feature 3: Filtering dishes by categories
+- Feature 4: Allowing users to bookmark dishes
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+The application currently utilizes local JSON data. An API integration will be implemented once additional funding is secured.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Built With
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The project employs the following libraries, frameworks, and tools:
+
+- [Next.js](https://nextjs.org/) - The React framework
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
+
+## Contributing
+
+Instructions for submitting pull requests or contributing to the project will be provided.
+
+## License
+
+This project is licensed under the [License Name] - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Inspired by afrieirham's Resipi Khairulaming, Recipe @CheNom serves as an adaptation of his original product.
