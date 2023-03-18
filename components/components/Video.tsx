@@ -2,6 +2,7 @@
 import React from 'react'
 import { IVideo } from '@/models/interface';
 import useSanitize from '@/hooks/useSanitize';
+import LazyImage from './LazyImage';
 
 const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
   const sanitizedTitle = useSanitize(videoTitle);
@@ -11,7 +12,7 @@ const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
       <div className="w-full h-[200px] relative">
         <a href={videoUrl} target="_blank" rel="noopener noreferrer">
           <div className="relative w-full h-full rounded-lg overflow-hidden transition-transform duration-300 lg:hover:scale-105">
-            <img
+            <LazyImage
               className="rounded-lg w-full h-full object-cover absolute z-0 top-0 left-0"
               src={imgUrl}
               alt={altTitle}
@@ -23,9 +24,9 @@ const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
             </div>
           </div>
         </a>
-
       </div>
     </div>
+
   )
 }
 
