@@ -41,9 +41,9 @@ npm run dev
 The main features of the project include:
 
 - Feature 1: Displaying all dishes from CheNom's YouTube channel
-- Feature 2: Implementing a search functionality for dishes
-- Feature 3: Filtering dishes by categories
-- Feature 4: Allowing users to bookmark dishes
+- Feature 2: Implementing a search functionality for dishes (in-progress)
+- Feature 3: Filtering dishes by categories (in-progress)
+- Feature 4: Allowing users to bookmark dishes (in-progress)
 
 ## Usage
 
