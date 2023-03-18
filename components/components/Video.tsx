@@ -10,7 +10,7 @@ const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
     <div className='w-full md:w-1/2 lg:w-1/3 p-2'>
       <div className="w-full h-[200px] relative">
         <a href={videoUrl} target="_blank" rel="noopener noreferrer">
-          <div className="relative w-full h-full rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+          <div className="relative w-full h-full rounded-lg overflow-hidden transition-transform duration-300 lg:hover:scale-105">
             <img
               className="rounded-lg w-full h-full object-cover absolute z-0 top-0 left-0"
               src={imgUrl}
