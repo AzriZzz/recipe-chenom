@@ -1,9 +1,31 @@
 import { disclaimer, githubDescription, githubLink } from '@/constants/data'
 import { LayoutProps } from '@/models/interface'
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Layout = ({ meta, children }: LayoutProps) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => {
+        if (window.pageYOffset > 300) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', toggleVisibility);
+        return () => window.removeEventListener('scroll', toggleVisibility);
+    }, []);
+
     return (
         <>
             <Head>
@@ -23,9 +45,15 @@ const Layout = ({ meta, children }: LayoutProps) => {
             </Head>
             <main>
                 {children}
-                <div className='fixed z-0 bottom-0 right-0 cursor-pointer'>
+                <button
+                    className={`fixed z-0 bottom-0 right-0 cursor-pointer p-5 ${isVisible ? 'opacity-100' : 'opacity-0'
+                        } transition-opacity duration-300 bg-blue-500 text-white rounded`}
+                    onClick={scrollToTop}
+                >
                     Back to Top
-                </div>
+                    {/* Will change to fonticon */}
+                </button>
+
             </main>
             <footer className='grid place-content-center py-5 text-sm bg-primary-backgroud-blue' >
                 <a className='hover:underline transition-all duration-100 ease-in-out' target="_blank" href={githubLink} rel="noopener noreferrer" title={githubDescription}>
