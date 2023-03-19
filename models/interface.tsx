@@ -39,6 +39,8 @@ export interface IVideo {
     videoTitle: string,
     channelTitle: string,
     imgUrl: string,
+    width: number,
+    height: number,
     altTitle: string,
     videoUrl: string,
 }

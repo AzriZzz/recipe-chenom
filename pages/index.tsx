@@ -46,6 +46,8 @@ export default function Home() {
                   videoTitle={video.snippet.title}
                   channelTitle={video.snippet.channelTitle}
                   imgUrl={video.snippet.thumbnails.medium.url}
+                  width={video.snippet.thumbnails.medium.width}
+                  height={video.snippet.thumbnails.medium.height}
                   altTitle={video.snippet.title}
                   videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
                 />

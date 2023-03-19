@@ -3,8 +3,9 @@ import React from 'react'
 import { IVideo } from '@/models/interface';
 import useSanitize from '@/hooks/useSanitize';
 import LazyImage from './LazyImage';
+import Image from 'next/image';
 
-const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
+const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl }: IVideo) => {
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -16,10 +17,18 @@ const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
       <div className="w-full h-[200px] relative">
         <a href={videoUrl} target="_blank" rel="noopener noreferrer">
           <div className="relative w-full h-full overflow-hidden transition-transform duration-300 rounded-lg lg:hover:scale-105">
-            <LazyImage
+            {/* <LazyImage
               className="absolute top-0 left-0 z-0 object-cover w-full h-full rounded-lg"
               src={imgUrl}
               alt={altTitle}
+            /> */}
+            <Image
+              className="top-0 left-0 z-0 object-cover w-full h-full rounded-lg"
+              src={imgUrl}
+              alt={altTitle}
+              width={width}
+              height={height}
+              priority={true}
             />
             <div className="absolute top-0 left-0 z-10 flex items-end w-full h-full rounded-lg bg-gradient-to-t from-neutral-black to-transparent">
               <div className=' text-neutral-white-smoke text-sm md:text-xs 2xl:text-sm font-bold h-[55px] w-full p-2'>
