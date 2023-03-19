@@ -21,12 +21,12 @@ export default function Home() {
   return (
     <Layout meta={meta}>
       <div className='bg-primary-backgroud-blue text-primary-dark-blue'>
-        <h1 className='font-bold py-5 text-3xl flex items-center justify-center w-1/'>
+        <h1 className='flex items-center justify-center py-5 text-3xl font-bold w-1/'>
           <a target="_blank" href={youtubeLink} rel="noopener noreferrer" title={visitTitle}>
             {title}
           </a>
         </h1>
-        <div className='w-full flex items-center justify-center px-5'>
+        <div className='flex items-center justify-center w-full px-5'>
           <Search
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -36,9 +36,9 @@ export default function Home() {
         <div className='flex items-center justify-center py-5'>
           <Filter data={filterList} />
         </div>
-        <div className='grid grid-cols-12  px-5'>
-          <div className="col-span-12 md:col-span-2"></div>
-          <div className="col-span-12 md:col-span-8 flex flex-wrap">
+        <div className='grid grid-cols-12 px-5'>
+          <div className="col-span-12 md:col-span-1 lg:col-span-2 "></div>
+          <div className="flex flex-wrap col-span-12 md:col-span-10 lg:col-span-8 ">
             {hasResults ? (
               filteredResults.map((video) => (
                 <Video
@@ -51,7 +51,7 @@ export default function Home() {
                 />
               ))
             ) : (
-              <div className="w-full flex items-center justify-center">
+              <div className="flex items-center justify-center w-full ">
                 <Image
                   src="/images/no-food.gif"
                   alt="Close Icon"
@@ -62,7 +62,7 @@ export default function Home() {
               </div>
             )}
           </div>
-          <div className="col-span-12 md:col-span-2"></div>
+          <div className="col-span-12 md:col-span-1 lg:col-span-2 "></div>
         </div>
       </div>
     </Layout>
