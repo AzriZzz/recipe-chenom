@@ -37,8 +37,8 @@ export default function Home() {
           <Filter data={filterList} />
         </div>
         <div className='grid grid-cols-12 px-5'>
-          <div className="col-span-12 md:col-span-1 lg:col-span-2 "></div>
-          <div className="flex flex-wrap col-span-12 md:col-span-10 lg:col-span-8 ">
+          <div className="col-span-12 md:col-span-1 lg:col-span-3 "></div>
+          <div className="flex flex-wrap col-span-12 md:col-span-10 lg:col-span-6 ">
             {hasResults ? (
               filteredResults.map((video) => (
                 <Video
@@ -62,7 +62,7 @@ export default function Home() {
               </div>
             )}
           </div>
-          <div className="col-span-12 md:col-span-1 lg:col-span-2 "></div>
+          <div className="col-span-12 md:col-span-1 lg:col-span-3 "></div>
         </div>
       </div>
     </Layout>

@@ -22,7 +22,7 @@ const Video = ({ videoTitle, imgUrl, altTitle, videoUrl }: IVideo) => {
               alt={altTitle}
             />
             <div className="absolute top-0 left-0 z-10 flex items-end w-full h-full rounded-lg bg-gradient-to-t from-neutral-black to-transparent">
-              <div className=' text-neutral-white-smoke text-sm font-bold h-[55px] w-full p-2'>
+              <div className=' text-neutral-white-smoke text-sm md:text-xs 2xl:text-sm font-bold h-[55px] w-full p-2'>
                 <p dangerouslySetInnerHTML={{ __html: useSanitize(videoTitle) }} />
               </div>
             </div>
