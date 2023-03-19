@@ -43,6 +43,7 @@ export interface IVideo {
     height: number,
     altTitle: string,
     videoUrl: string,
+    isPriority: boolean,
 }
 
 export interface LayoutProps {

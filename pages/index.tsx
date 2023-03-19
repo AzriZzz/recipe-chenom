@@ -40,7 +40,7 @@ export default function Home() {
           <div className="col-span-12 md:col-span-1 lg:col-span-3 "></div>
           <div className="flex flex-wrap col-span-12 md:col-span-10 lg:col-span-6 ">
             {hasResults ? (
-              filteredResults.map((video) => (
+              filteredResults.map((video,index) => (
                 <Video
                   key={video.id.videoId}
                   videoTitle={video.snippet.title}
@@ -50,6 +50,7 @@ export default function Home() {
                   height={video.snippet.thumbnails.medium.height}
                   altTitle={video.snippet.title}
                   videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                  isPriority={index < 10}
                 />
               ))
             ) : (

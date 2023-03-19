@@ -5,7 +5,7 @@ import useSanitize from '@/hooks/useSanitize';
 import LazyImage from './LazyImage';
 import Image from 'next/image';
 
-const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl }: IVideo) => {
+const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority }: IVideo) => {
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -28,7 +28,7 @@ const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl }: IVideo
               alt={altTitle}
               width={width}
               height={height}
-              priority={true}
+              priority={isPriority}
             />
             <div className="absolute top-0 left-0 z-10 flex items-end w-full h-full rounded-lg bg-gradient-to-t from-neutral-black to-transparent">
               <div className=' text-neutral-white-smoke text-sm md:text-xs 2xl:text-sm font-bold h-[55px] w-full p-2'>
