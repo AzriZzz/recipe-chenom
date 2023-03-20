@@ -34,13 +34,12 @@ export default function Home() {
           />
         </div>
         <div className='flex items-center justify-center py-5'>
-          <Filter data={filterList} />
+          {/* <Filter data={filterList} /> */}
         </div>
-        <div className='grid grid-cols-12 px-5'>
-          <div className="col-span-12 md:col-span-1 lg:col-span-3 "></div>
-          <div className="flex flex-wrap col-span-12 md:col-span-10 lg:col-span-6 ">
-            {hasResults ? (
-              filteredResults.map((video,index) => (
+        <div className='flex justify-center '>
+          {hasResults ? (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {filteredResults.map((video, index) => (
                 <Video
                   key={video.id.videoId}
                   videoTitle={video.snippet.title}
@@ -52,20 +51,19 @@ export default function Home() {
                   videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
                   isPriority={index < 10}
                 />
-              ))
-            ) : (
-              <div className="flex items-center justify-center w-full ">
-                <Image
-                  src="/images/no-food.gif"
-                  alt="Close Icon"
-                  className="relative"
-                  width={300}
-                  height={300}
-                />
-              </div>
-            )}
-          </div>
-          <div className="col-span-12 md:col-span-1 lg:col-span-3 "></div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid place-content-center">
+              <Image
+                src="/images/no-food.jpg"
+                alt="No food here"
+                className="relative"
+                width={300}
+                height={300}
+              />
+            </div>
+          )}
         </div>
       </div>
     </Layout>
