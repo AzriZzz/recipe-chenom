@@ -68,4 +68,10 @@ export interface LazyImageProps {
     src: string;
     alt: string;
     className?: string;
-  }
+}
+
+export interface FilterProps {
+    data: string[];
+    currentFilter: string;
+    setCurrentFilter: (filter: string) => void;
+}

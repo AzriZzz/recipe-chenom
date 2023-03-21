@@ -11,12 +11,16 @@ import Image from 'next/image';
 export default function Home() {
   const resultData = cheNomJson;
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentFilter, setCurrentFilter] = useState('All');
 
-  const filteredResults = resultData.filter((video) =>
-    video.snippet.title.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const filteredResults = resultData.filter((video) => {
+    return (
+      video.snippet.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (currentFilter === 'All' ||
+        video.snippet.title.toLowerCase().includes(currentFilter.toLowerCase()))
+    );
+  });
   const hasResults = filteredResults.length > 0;
-
 
   return (
     <Layout meta={meta}>
@@ -34,7 +38,11 @@ export default function Home() {
           />
         </div>
         <div className='flex items-center justify-center py-5'>
-          {/* <Filter data={filterList} /> */}
+          <Filter
+            data={filterList}
+            currentFilter={currentFilter}
+            setCurrentFilter={setCurrentFilter}
+          />
         </div>
         <div className='flex justify-center '>
           {hasResults ? (
