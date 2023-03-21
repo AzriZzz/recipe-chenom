@@ -12,7 +12,7 @@ const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriori
   };
 
   return (
-    <div className="md:w-[250px] h-[200px] p-2">
+    <div className="w-full md:w-[250px] h-[200px] md:p-2">
       <div className="w-full h-[200px] relative">
         <a href={videoUrl} target="_blank" rel="noopener noreferrer">
           <div className="relative w-full h-full overflow-hidden transition-transform duration-300 lg:hover:scale-105">
