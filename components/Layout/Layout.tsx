@@ -1,8 +1,9 @@
-import { disclaimer, githubDescription, githubLink } from '@/constants/data'
-import { LayoutProps } from '@/models/interface'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { disclaimer, githubDescription, githubLink } from '@/constants/data'
+import { LayoutProps } from '@/models/interface'
 const Layout = ({ meta, children }: LayoutProps) => {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -47,17 +48,16 @@ const Layout = ({ meta, children }: LayoutProps) => {
             <main>
                 {children}
                 <button
-                    className={`fixed z-30 bottom-0 right-0 cursor-pointer p-5 ${isVisible ? 'opacity-100' : 'opacity-0'
-                        } transition-opacity duration-300 bg-blue-500 text-white rounded`}
+                    className={`fixed bg-neutral-silver z-30 bottom-1 right-1 md:bottom-5 md:right-5 cursor-pointer p-3 md:p-5 ${isVisible ? 'opacity-70' : 'opacity-0'
+                        } transition-opacity duration-300 text-white `}
                     onClick={scrollToTop}
                 >
-                    Back to Top
-                    {/* Will change to fonticon */}
+                    <FontAwesomeIcon icon={faArrowUp} />
                 </button>
 
             </main>
-            <footer className='grid place-content-center py-5 text-sm bg-primary-backgroud-blue' >
-                <a className='hover:underline transition-all duration-100 ease-in-out' target="_blank" href={githubLink} rel="noopener noreferrer" title={githubDescription}>
+            <footer className='grid py-5 text-sm place-content-center bg-primary-backgroud-blue' >
+                <a className='transition-all duration-100 ease-in-out hover:underline' target="_blank" href={githubLink} rel="noopener noreferrer" title={githubDescription}>
                     {disclaimer}
                 </a>
             </footer>

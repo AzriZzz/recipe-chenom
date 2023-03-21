@@ -23,7 +23,7 @@ export default function Home() {
 
   const toastStyle = {
     hideProgressBar: true,
-    autoClose: 1000,
+    autoClose: 2000,
     position: 'bottom-right' as ToastPosition,
   };
 
