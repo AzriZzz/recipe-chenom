@@ -46,7 +46,7 @@ export default function Home() {
         </div>
         <div className='flex justify-center '>
           {hasResults ? (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-3">
               {filteredResults.map((video, index) => (
                 <Video
                   key={video.id.videoId}
