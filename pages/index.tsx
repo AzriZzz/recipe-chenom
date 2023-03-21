@@ -24,7 +24,7 @@ export default function Home() {
   const toastStyle = {
     hideProgressBar: true,
     autoClose: 1000,
-    position: 'top-center' as ToastPosition,
+    position: 'bottom-right' as ToastPosition,
   };
 
   const showToast = (message: string, type: 'success' | 'error') => {
