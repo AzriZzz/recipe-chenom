@@ -3,13 +3,11 @@ import React from 'react'
 import { IVideo } from '@/models/interface';
 import useSanitize from '@/hooks/useSanitize';
 import Image from 'next/image';
+import Bookmark from './Bookmark';
 
 const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority }: IVideo) => {
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    console.log('Bookmark')
-  };
+  
 
   return (
     <div className="md:w-[250px] h-[200px] p-2">
@@ -31,12 +29,7 @@ const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriori
             </div>
           </div>
         </a>
-        {/* <div
-          className='absolute z-20 right-1 top-1 bg-primary-dark-blue text-neutral-white-smoke hover:text-primary-success hover:cursor-pointer'
-          onClick={handleClick}
-        >
-          Star
-        </div> */}
+        <Bookmark />
       </div>
     </div>
   )
