@@ -24,7 +24,7 @@ export default function Home() {
   const toastStyle = {
     hideProgressBar: true,
     autoClose: 1000,
-    position: 'bottom-right' as ToastPosition,
+    position: 'top-center' as ToastPosition,
   };
 
   const showToast = (message: string, type: 'success' | 'error') => {
@@ -62,6 +62,7 @@ export default function Home() {
       );
     })
     .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0));
+
   const hasResults = filteredResults.length > 0;
 
   return (
