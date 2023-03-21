@@ -7,8 +7,6 @@ import Bookmark from './Bookmark';
 
 const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority }: IVideo) => {
 
-  
-
   return (
     <div className="w-full md:w-[250px] h-[200px] md:p-2">
       <div className="w-full h-[200px] relative">

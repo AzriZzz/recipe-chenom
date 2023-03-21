@@ -18,7 +18,8 @@ module.exports = {
         'warning': '#FFB502',
         'backgroud-blue': '#F4F8FF',
         'light-blue': '#71B2FF',
-        'hover-blue': '#D8E8FF'
+        'hover-blue': '#D8E8FF',
+        'yellow': 'rgb(253 224 71)'
       },
       'neutral': {
         'black': '#000000',
