@@ -1,13 +1,14 @@
+import Image from 'next/image';
 import Video from '@/components/components/Video';
 import Filter from '@/components/components/Filter';
 import Search from '@/components/components/Search';
 import Layout from '@/components/Layout/Layout';
-import { filterList, meta } from '@/constants/config';
 import { title, visitTitle, youtubeLink } from '@/constants/data';
+import { ToastContainer, toast, ToastPosition } from 'react-toastify';
+import { filterList, meta } from '@/constants/config';
+import { VideoItemType } from '@/models/interface';
 import { cheNomJson } from '@/constants/mock';
 import { useState } from 'react';
-import Image from 'next/image';
-import { VideoItemType } from '@/models/interface';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,6 +21,19 @@ export default function Home() {
     }))
   );
 
+  const toastStyle = {
+    hideProgressBar: true,
+    autoClose: 1000,
+    position: 'bottom-right' as ToastPosition,
+  };
+
+  const showToast = (message: string, type: 'success' | 'error') => {
+    toast(message, {
+      ...toastStyle,
+      type,
+    });
+  };
+
   const handleBookmarkChange = (video: VideoItemType) => {
     const updatedResultData = resultData.map((v) =>
       v.id.videoId === video.id.videoId
@@ -27,6 +41,16 @@ export default function Home() {
         : v
     );
     setResultData(updatedResultData);
+
+    const isBookmarked = (
+      updatedResultData.find((v) => v.id.videoId === video.id.videoId) ?? { isBookmark: false }
+    ).isBookmark;
+
+    if (isBookmarked) {
+      showToast(`"${video.snippet.title}" added to bookmarks!`, 'success');
+    } else {
+      showToast(`"${video.snippet.title}" removed from bookmarks!`, 'error');
+    }
   };
 
   const filteredResults = resultData
@@ -42,6 +66,7 @@ export default function Home() {
 
   return (
     <Layout meta={meta}>
+      <ToastContainer />
       <div className='bg-primary-backgroud-blue text-primary-dark-blue'>
         <h1 className='flex items-center justify-center py-5 text-3xl font-bold w-1/'>
           <a target="_blank" href={youtubeLink} rel="noopener noreferrer" title={visitTitle}>
