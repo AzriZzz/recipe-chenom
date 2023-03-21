@@ -7,19 +7,37 @@ import { title, visitTitle, youtubeLink } from '@/constants/data';
 import { cheNomJson } from '@/constants/mock';
 import { useState } from 'react';
 import Image from 'next/image';
+import { VideoItemType } from '@/models/interface';
 
 export default function Home() {
-  const resultData = cheNomJson;
   const [searchTerm, setSearchTerm] = useState('');
   const [currentFilter, setCurrentFilter] = useState('All');
 
-  const filteredResults = resultData.filter((video) => {
-    return (
-      video.snippet.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (currentFilter === 'All' ||
-        video.snippet.title.toLowerCase().includes(currentFilter.toLowerCase()))
+  const [resultData, setResultData] = useState(
+    cheNomJson.map((item) => ({
+      ...item,
+      isBookmark: false,
+    }))
+  );
+
+  const handleBookmarkChange = (video: VideoItemType) => {
+    const updatedResultData = resultData.map((v) =>
+      v.id.videoId === video.id.videoId
+        ? { ...v, isBookmark: !v.isBookmark }
+        : v
     );
-  });
+    setResultData(updatedResultData);
+  };
+
+  const filteredResults = resultData
+    .filter((video) => {
+      return (
+        video.snippet.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (currentFilter === 'All' ||
+          video.snippet.title.toLowerCase().includes(currentFilter.toLowerCase()))
+      );
+    })
+    .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0));
   const hasResults = filteredResults.length > 0;
 
   return (
@@ -47,9 +65,11 @@ export default function Home() {
         <div className='flex justify-center '>
           {hasResults ? (
             <div className="w-full sm:px-2 sm:w-auto sm:grid sm:grid-cols-2 sm:gap-4 md:gap-4 md:grid-cols-3">
-            {filteredResults.map((video, index) => (
+              {filteredResults.map((video, index) => (
                 <Video
                   key={video.id.videoId}
+                  video={video}
+                  onBookmarkChange={handleBookmarkChange}
                   videoTitle={video.snippet.title}
                   channelTitle={video.snippet.channelTitle}
                   imgUrl={video.snippet.thumbnails.medium.url}

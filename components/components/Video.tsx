@@ -5,7 +5,7 @@ import useSanitize from '@/hooks/useSanitize';
 import Image from 'next/image';
 import Bookmark from './Bookmark';
 
-const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority }: IVideo) => {
+const Video: React.FC<IVideo> = ({  videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority, video, onBookmarkChange }) => {
 
   return (
     <div className="w-full md:w-[250px] h-[200px] md:p-2">
@@ -27,7 +27,7 @@ const Video = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriori
             </div>
           </div>
         </a>
-        <Bookmark />
+        <Bookmark video={video} onBookmarkChange={onBookmarkChange} />
       </div>
     </div>
   )

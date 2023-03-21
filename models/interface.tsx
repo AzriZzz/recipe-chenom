@@ -36,14 +36,40 @@ export interface SearchResult {
 }
 
 export interface IVideo {
-    videoTitle: string,
-    channelTitle: string,
-    imgUrl: string,
-    width: number,
-    height: number,
-    altTitle: string,
-    videoUrl: string,
-    isPriority: boolean,
+    videoTitle: string;
+    channelTitle: string;
+    imgUrl: string;
+    width: number;
+    height: number;
+    altTitle: string;
+    videoUrl: string;
+    isPriority: boolean;
+    video: VideoItemType;
+    onBookmarkChange: (video: VideoItemType) => void;
+}
+
+// You also need to create the VideoItemType type
+export interface VideoItemType {
+    id: {
+        videoId: string;
+    };
+    snippet: {
+        title: string;
+        channelTitle: string;
+        thumbnails: {
+            medium: {
+                url: string;
+                width: number;
+                height: number;
+            };
+        };
+    };
+    isBookmark: boolean;
+}
+
+export interface BookmarkProps {
+    video: VideoItemType;
+    onBookmarkChange: (video: VideoItemType) => void;
 }
 
 export interface LayoutProps {
