@@ -8,8 +8,8 @@ const Filter: React.FC<FilterProps> = ({ data, currentFilter, setCurrentFilter }
         {data.map((item: string) => (
           <li
             key={item}
-            className={`transition-all duration-300 ease-in-out text-xs md:text-sm hover:font-semibold max
-            ${currentFilter === item ? 'font-semibold text-sm bg-primary-dark-blue text-neutral-white p-1 px-2 rounded' : ''}`}
+            className={`transition-all duration-300 py-1 ease-in-out text-xs md:text-sm hover:font-semibold max
+            ${currentFilter === item ? 'font-semibold text-sm bg-primary-dark-blue text-neutral-white  px-2 rounded' : ''}`}
             onClick={() => setCurrentFilter(item)}
             >
             {item}
