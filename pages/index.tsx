@@ -55,11 +55,19 @@ export default function Home() {
 
   const filteredResults = resultData
     .filter((video) => {
-      return (
-        video.snippet.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (currentFilter === 'All' ||
-          video.snippet.title.toLowerCase().includes(currentFilter.toLowerCase()))
-      );
+      const titleLower = video.snippet.title.toLowerCase();
+      const isIncluded = titleLower.includes(searchTerm.toLowerCase());
+      const isBookmarkFilter = currentFilter === 'Bookmark';
+
+      if (isBookmarkFilter) {
+        return isIncluded && video.isBookmark;
+      }
+
+      if (currentFilter !== 'All') {
+        return isIncluded && titleLower.includes(currentFilter.toLowerCase());
+      }
+
+      return isIncluded;
     })
     .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0));
 
@@ -103,7 +111,7 @@ export default function Home() {
                   height={video.snippet.thumbnails.medium.height}
                   altTitle={video.snippet.title}
                   videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                  isPriority={index < 10}
+                  isPriority={index < 5}
                 />
               ))}
             </div>

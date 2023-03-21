@@ -11,5 +11,5 @@ export const filterList = [
   'Nasi',
   'Ayam',
   'Ikan',
-  'Daging',
+  'Kuih',
 ]

@@ -21,13 +21,13 @@ const Bookmark: React.FC<BookmarkProps> = ({ video, onBookmarkChange }) => {
       {video.isBookmark ? (
         <FontAwesomeIcon
           icon={faStarSolid}
-          className="text-lg text-primary-yellow"
+          className="text-2xl md:text-lg text-primary-yellow"
           
         />
       ) : (
         <FontAwesomeIcon
           icon={faStarRegular}
-          className="text-lg text-primary-yellow hover:text-primary-yellow"
+          className="text-2xl md:text-lg text-primary-yellow hover:text-primary-yellow"
         />
       )}
     </div>
