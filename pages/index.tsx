@@ -88,7 +88,7 @@ export default function Home() {
         </div>
         <div className='flex justify-center '>
           {hasResults ? (
-            <div className="w-full sm:px-2 sm:w-auto sm:grid sm:grid-cols-2 sm:gap-4 md:gap-4 md:grid-cols-3">
+            <div className="w-full sm:px-2 sm:w-auto sm:grid sm:grid-cols-2 sm:gap-4 md:gap-2 md:grid-cols-3">
               {filteredResults.map((video, index) => (
                 <motion.div
                   key={video.id.videoId}
@@ -102,9 +102,9 @@ export default function Home() {
                     onBookmarkChange={handleBookmarkChange}
                     videoTitle={video.snippet.title}
                     channelTitle={video.snippet.channelTitle}
-                    imgUrl={video.snippet.thumbnails.medium.url}
-                    width={video.snippet.thumbnails.medium.width}
-                    height={video.snippet.thumbnails.medium.height}
+                    imgUrl={video.snippet.thumbnails.high.url}
+                    width={video.snippet.thumbnails.high.width}
+                    height={video.snippet.thumbnails.high.height}
                     altTitle={video.snippet.title}
                     videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
                     isPriority={index < 5}

@@ -41,11 +41,19 @@ module.exports = {
         'card': '0px 1px 3px 0px rgba(0, 0, 0, 0.2)',
         'subsCard': '0px 10px 30px rgba(32, 45, 65, 0.1)',
         'button': '0px 1px 3px rgba(0, 0, 0, 0.2)'
-      }
+      },
+      lineHeight: {
+        'clamp-2': '2.6rem',
+      },
     },
     variants: {
       fill: ['hover', 'focus'], // this line does the trick
+      extend: {
+        lineHeight: ['responsive'],
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }

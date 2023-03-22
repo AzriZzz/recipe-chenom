@@ -14,15 +14,12 @@ const Bookmark: React.FC<BookmarkProps> = ({ video, onBookmarkChange }) => {
   };
 
   return (
-    <div
-      className="absolute z-20 cursor-pointer right-1 top-1 bg-primary-dark-"
-      onClick={handleClick}
-    >
+    <div onClick={handleClick}>
       {video.isBookmark ? (
         <FontAwesomeIcon
           icon={faStarSolid}
           className="text-2xl md:text-lg text-primary-yellow"
-          
+
         />
       ) : (
         <FontAwesomeIcon

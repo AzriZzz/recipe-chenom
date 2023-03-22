@@ -1,17 +1,16 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { IVideo } from '@/models/interface';
 import useSanitize from '@/hooks/useSanitize';
 import Image from 'next/image';
 import Bookmark from './Bookmark';
 
-const Video: React.FC<IVideo> = ({  videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority, video, onBookmarkChange }) => {
+const Video: React.FC<IVideo> = ({ videoTitle, imgUrl, width, height, altTitle, videoUrl, isPriority, video, onBookmarkChange }) => {
 
   return (
     <div className="w-full md:w-[250px] h-[200px] md:p-2">
-      <div className="w-full h-[200px] relative">
+      <div className="w-full">
         <a href={videoUrl} target="_blank" rel="noopener noreferrer">
-          <div className="relative w-full h-full overflow-hidden transition-transform duration-300 lg:hover:scale-105">
+          <div className="relative w-full h-[150px] overflow-hidden transition-transform duration-300 lg:hover:scale-105">
             <Image
               className="top-0 left-0 z-0 object-cover w-full h-full"
               src={imgUrl}
@@ -20,14 +19,18 @@ const Video: React.FC<IVideo> = ({  videoTitle, imgUrl, width, height, altTitle,
               height={height}
               priority={isPriority}
             />
-            <div className="absolute top-0 left-0 z-10 flex items-end w-full h-full bg-gradient-to-t from-neutral-black to-transparent">
-              <div className=' text-neutral-white-smoke text-sm md:text-xs 2xl:text-sm font-bold h-[55px] w-full p-2'>
-                <p dangerouslySetInnerHTML={{ __html: useSanitize(videoTitle) }} />
-              </div>
-            </div>
           </div>
         </a>
-        <Bookmark video={video} onBookmarkChange={onBookmarkChange} />
+        <div className="flex items-center justify-between mt-2">
+          <div className="text-sm font-bold text-neutral-white-smoke md:text-xs 2xl:text-sm">
+            <a href={videoUrl} target="_blank" rel="noopener noreferrer">
+              <p className="line-clamp-2" dangerouslySetInnerHTML={{ __html: useSanitize(videoTitle) }} />
+            </a>
+          </div>
+          <div className="flex items-center">
+            <Bookmark video={video} onBookmarkChange={onBookmarkChange} />
+          </div>
+        </div>
       </div>
     </div>
   )
