@@ -21,7 +21,6 @@ export default function Home({ cheNomJson }: HomeProps) {
   const [currentFilter, setCurrentFilter] = useState('All');
   const [bookmarkedIndex, setBookmarkedIndex] = useState<number | null>(null);
   const [resultData, setResultData] = useState(cheNomJson);
-  console.log(cheNomJson[0]);
 
   useEffect(() => {
     // Load bookmark data from localStorage when the component mounts
