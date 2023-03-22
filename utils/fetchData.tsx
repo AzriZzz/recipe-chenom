@@ -33,7 +33,7 @@ export async function fetchData(): Promise<VideoItemType[]> {
     const videos: VideoItemType[] = searchResults.map(video => ({
       id: video.id?.videoId || '',
       title: video.snippet?.title || '',
-      videoUrl: `https://www.youtube.com/watch?v=${video.id}`,
+      videoUrl: `https://www.youtube.com/watch?v=${video.id?.videoId}`,
       imgUrl: video.snippet?.thumbnails?.high?.url || '',
       width: video.snippet?.thumbnails?.high?.width || 0,
       height: video.snippet?.thumbnails?.high?.height || 0,
