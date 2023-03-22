@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { filterList, meta } from '@/constants/config';
 import { VideoItemType } from '@/models/interface';
 import { cheNomJson } from '@/constants/mock';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from "framer-motion";
 import showToast from '@/constants/toastConfig';
 
@@ -21,6 +21,26 @@ export default function Home() {
       isBookmark: false,
     }))
   );
+
+  useEffect(() => {
+    // Load bookmark data from localStorage when the component mounts
+    const bookmarkedVideos = JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]');
+    console.log(bookmarkedVideos)
+    setResultData(
+      cheNomJson.map((item) => ({
+        ...item,
+        isBookmark: bookmarkedVideos.includes(item.id.videoId),
+      }))
+    );
+  }, []);
+
+  useEffect(() => {
+    // Save bookmark data to localStorage after each change
+    localStorage.setItem(
+      'bookmarkedVideos',
+      JSON.stringify(resultData.filter((v) => v.isBookmark).map((v) => v.id.videoId))
+    );
+  }, [resultData]);
 
   const handleBookmarkChange = (video: VideoItemType) => {
     const updatedResultData = resultData.map((v) =>
@@ -36,8 +56,19 @@ export default function Home() {
     setBookmarkedIndex(bookmarkedVideo ? updatedResultData.indexOf(bookmarkedVideo) : null);
 
     if (bookmarkedVideo) {
+      // Add the video ID to localStorage
+      localStorage.setItem(
+        'bookmarkedVideos',
+        JSON.stringify([...JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]'), video.id.videoId])
+      );
       showToast(`"${video.snippet.title}" added to bookmarks!`, 'success');
     } else {
+      // Remove the video ID from localStorage
+      localStorage.setItem(
+        'bookmarkedVideos',
+        JSON.stringify(JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]').filter((id: string) => id !== video.id.videoId))
+      );
+      
       showToast(`"${video.snippet.title}" removed from bookmarks!`, 'error');
     }
   };
@@ -101,7 +132,7 @@ export default function Home() {
                     height={video.snippet.thumbnails.high.height}
                     altTitle={video.snippet.title}
                     videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                    // isPriority={index < 2}
+                  // isPriority={index < 2}
                   />
                 </motion.div>
               ))}
