@@ -10,7 +10,7 @@ const Video: React.FC<IVideo> = ({ videoTitle, imgUrl, width, height, altTitle, 
     <div className="w-full md:w-[250px] h-[260px] md:h-[190px] md:p-0">
       <div className="w-full">
         <a href={videoUrl} target="_blank" rel="noopener noreferrer">
-          <div className="relative w-full h-[200px] md:h-[140px]  md:rounded overflow-hidden transition-transform duration-300 lg:hover:scale-105">
+          <div className="relative w-full h-[210px] md:h-[140px]  md:rounded overflow-hidden transition-transform duration-300 lg:hover:scale-105">
             <Image
               className="top-0 left-0 z-0 object-cover w-full h-full"
               src={imgUrl}
