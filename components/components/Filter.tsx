@@ -4,7 +4,7 @@ import React from 'react'
 const Filter: React.FC<FilterProps> = ({ data, currentFilter, setCurrentFilter }) => {
   return (
     <div className=''>
-      <ul className="flex flex-wrap items-center justify-center px-5 text-sm cursor-pointer lg:flex-row gap-x-5 md:text-lg lg:px-0">
+      <ul className="flex flex-wrap items-center justify-center px-5 text-sm font-semibold cursor-pointer lg:flex-row gap-x-5 md:text-lg lg:px-0">
         {data.map((item: string) => (
           <li
             key={item}

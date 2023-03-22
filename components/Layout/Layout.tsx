@@ -2,8 +2,10 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { disclaimer, githubDescription, githubLink } from '@/constants/data'
 import { LayoutProps } from '@/models/interface'
+import Header from './Header';
+import Footer from './Footer';
+
 const Layout = ({ meta, children }: LayoutProps) => {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -45,6 +47,7 @@ const Layout = ({ meta, children }: LayoutProps) => {
                 <meta name="twitter:image" content={meta.image} />
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
+            <Header />
             <main>
                 {children}
                 <button
@@ -56,11 +59,7 @@ const Layout = ({ meta, children }: LayoutProps) => {
                 </button>
 
             </main>
-            <footer className='grid py-5 text-sm place-content-center bg-primary-backgroud-blue' >
-                <a className='transition-all duration-100 ease-in-out hover:underline' target="_blank" href={githubLink} rel="noopener noreferrer" title={githubDescription}>
-                    {disclaimer}
-                </a>
-            </footer>
+            <Footer />
         </>
     )
 }

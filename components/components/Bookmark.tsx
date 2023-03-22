@@ -14,7 +14,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ video, onBookmarkChange }) => {
   };
 
   return (
-    <div onClick={handleClick}>
+    <div className='' onClick={handleClick}>
       {video.isBookmark ? (
         <FontAwesomeIcon
           icon={faStarSolid}
@@ -24,7 +24,7 @@ const Bookmark: React.FC<BookmarkProps> = ({ video, onBookmarkChange }) => {
       ) : (
         <FontAwesomeIcon
           icon={faStarRegular}
-          className="text-2xl md:text-lg text-primary-yellow hover:text-primary-yellow"
+          className="text-2xl md:text-lg text-primary-dark-blue hover:text-primary-yellow"
         />
       )}
     </div>
