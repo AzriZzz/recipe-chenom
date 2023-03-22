@@ -21,6 +21,7 @@ const Search = ({ searchTerm, setSearchTerm, hasResults }: SearchProps) => {
                 <button
                     className="absolute right-0 flex items-center justify-center w-5 h-5 text-gray-700 transform -translate-x-4 -translate-y-1/2 border rounded-full top-1/2 focus:outline-none"
                     onClick={() => setSearchTerm('')}
+                    aria-label={SEARCHPLACEHOLDER}
                 >
                     ×
                 </button>

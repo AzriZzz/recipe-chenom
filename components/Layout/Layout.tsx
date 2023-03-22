@@ -5,31 +5,9 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { LayoutProps } from '@/models/interface'
 import Header from './Header';
 import Footer from './Footer';
+import Top from '../components/Top';
 
 const Layout = ({ meta, children }: LayoutProps) => {
-    const [isVisible, setIsVisible] = useState(false);
-
-    const toggleVisibility = () => {
-        if (window.pageYOffset > 300) {
-            setIsVisible(true);
-        } else {
-            setIsVisible(false);
-        }
-    };
-
-    const scrollToTop = (e: { stopPropagation: () => void }) => {
-        e.stopPropagation();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', toggleVisibility);
-        return () => window.removeEventListener('scroll', toggleVisibility);
-    }, []);
-
     return (
         <>
             <Head>
@@ -50,14 +28,7 @@ const Layout = ({ meta, children }: LayoutProps) => {
             <Header />
             <main>
                 {children}
-                <button
-                    className={`fixed bg-neutral-silver z-30 bottom-1 right-1 md:bottom-5 md:right-5 cursor-pointer p-3 md:p-5 ${isVisible ? 'opacity-70' : 'opacity-0'
-                        } transition-opacity duration-300 text-white `}
-                    onClick={scrollToTop}
-                >
-                    <FontAwesomeIcon icon={faArrowUp} />
-                </button>
-
+                <Top />
             </main>
             <Footer />
         </>
