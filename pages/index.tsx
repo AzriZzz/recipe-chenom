@@ -4,11 +4,11 @@ import Filter from '@/components/components/Filter';
 import Search from '@/components/components/Search';
 import Layout from '@/components/Layout/Layout';
 import { title, visitTitle, youtubeLink } from '@/constants/data';
-import { ToastContainer, toast, ToastPosition } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { filterList, meta } from '@/constants/config';
 import { VideoItemType } from '@/models/interface';
 import { cheNomJson } from '@/constants/mock';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from "framer-motion";
 import showToast from '@/constants/toastConfig';
 
@@ -16,8 +16,6 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentFilter, setCurrentFilter] = useState('All');
   const [bookmarkedIndex, setBookmarkedIndex] = useState<number | null>(null);
-
-
   const [resultData, setResultData] = useState(
     cheNomJson.map((item) => ({
       ...item,
@@ -33,19 +31,19 @@ export default function Home() {
     );
     setResultData(updatedResultData);
 
-    const bookmarkedVideoIndex = updatedResultData.findIndex(
+    const bookmarkedVideo = updatedResultData.find(
       (v) => v.id.videoId === video.id.videoId && v.isBookmark
     );
-    setBookmarkedIndex(bookmarkedVideoIndex);
+    setBookmarkedIndex(bookmarkedVideo ? updatedResultData.indexOf(bookmarkedVideo) : null);
 
-    if (bookmarkedVideoIndex !== -1) {
+    if (bookmarkedVideo) {
       showToast(`"${video.snippet.title}" added to bookmarks!`, 'success');
     } else {
       showToast(`"${video.snippet.title}" removed from bookmarks!`, 'error');
     }
   };
 
-  const filteredResults = resultData
+  const filteredResults = useMemo(() => resultData
     .filter((video) => {
       const titleLower = video.snippet.title.toLowerCase();
       const isIncluded = titleLower.includes(searchTerm.toLowerCase());
@@ -61,7 +59,7 @@ export default function Home() {
 
       return isIncluded;
     })
-    .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0));
+    .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0)), [resultData, searchTerm, currentFilter]);
 
   const hasResults = filteredResults.length > 0;
 
@@ -134,6 +132,5 @@ export default function Home() {
         </div>
       </div>
     </Layout>
-
   )
 }
