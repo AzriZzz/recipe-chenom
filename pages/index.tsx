@@ -116,7 +116,7 @@ export default function Home() {
                 <Image
                   src="/images/no-food.jpg"
                   alt="No food here"
-                  className="relative"
+                  className="relative rounded"
                   width={300}
                   height={300}
                 />
