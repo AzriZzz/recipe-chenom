@@ -43,7 +43,7 @@ export interface IVideo {
     height: number;
     altTitle: string;
     videoUrl: string;
-    isPriority: boolean;
+    // isPriority: boolean;
     video: VideoItemType;
     onBookmarkChange: (video: VideoItemType) => void;
 }
