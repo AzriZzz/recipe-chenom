@@ -30,30 +30,16 @@ export async function fetchData(): Promise<VideoItemType[]> {
 
     const searchResults = await getVideos(channelId);
 
-    // Map search results to VideoItemType[]
     const videos: VideoItemType[] = searchResults.map(video => ({
-      etag: video.etag,
-      id: { videoId: video.id?.videoId || '' },
-      kind: video.kind,
-      snippet: {
-        title: video.snippet?.title || '',
-        channelTitle: video.snippet?.channelTitle || '',
-        thumbnails: {
-          medium: {
-            url: video.snippet?.thumbnails?.medium?.url || '',
-            width: video.snippet?.thumbnails?.medium?.width || 0,
-            height: video.snippet?.thumbnails?.medium?.height || 0,
-          },
-          high: {
-            url: video.snippet?.thumbnails?.high?.url || '',
-            width: video.snippet?.thumbnails?.high?.width || 0,
-            height: video.snippet?.thumbnails?.high?.height || 0,
-          },
-        },
-      },
-      isBookmark: false, // Add the missing property
+      id: video.id?.videoId || '',
+      title: video.snippet?.title || '',
+      videoUrl: `https://www.youtube.com/watch?v=${video.id}`,
+      imgUrl: video.snippet?.thumbnails?.high?.url || '',
+      width: video.snippet?.thumbnails?.high?.width || 0,
+      height: video.snippet?.thumbnails?.high?.height || 0,
+      altTitle: video.snippet?.title || '',
+      isBookmark: false,
     }));
-
 
     // Save the data to a new file
     await fs.writeFile(filePath, JSON.stringify(videos));

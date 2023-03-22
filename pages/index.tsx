@@ -6,13 +6,11 @@ import Layout from '@/components/Layout/Layout';
 import { ToastContainer } from 'react-toastify';
 import { filterList, meta } from '@/constants/config';
 import { VideoItemType } from '@/models/interface';
-import { cheNomJson } from '@/constants/mock';
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from "framer-motion";
 import showToast from '@/constants/toastConfig';
 import { GetStaticProps } from 'next';
 import { fetchData } from '@/utils/fetchData'; // Update the import path if necessary
-import { InView } from "react-intersection-observer";
 
 interface HomeProps {
   cheNomJson: VideoItemType[];
@@ -22,12 +20,8 @@ export default function Home({ cheNomJson }: HomeProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentFilter, setCurrentFilter] = useState('All');
   const [bookmarkedIndex, setBookmarkedIndex] = useState<number | null>(null);
-  const [resultData, setResultData] = useState(
-    cheNomJson.map((item) => ({
-      ...item,
-      isBookmark: false,
-    }))
-  );
+  const [resultData, setResultData] = useState(cheNomJson);
+  console.log(cheNomJson[0]);
 
   useEffect(() => {
     // Load bookmark data from localStorage when the component mounts
@@ -35,7 +29,7 @@ export default function Home({ cheNomJson }: HomeProps) {
     setResultData(
       cheNomJson.map((item) => ({
         ...item,
-        isBookmark: bookmarkedVideos.includes(item.id.videoId),
+        isBookmark: bookmarkedVideos.includes(item.id),
       }))
     );
   }, []);
@@ -44,20 +38,20 @@ export default function Home({ cheNomJson }: HomeProps) {
     // Save bookmark data to localStorage after each change
     localStorage.setItem(
       'bookmarkedVideos',
-      JSON.stringify(resultData.filter((v) => v.isBookmark).map((v) => v.id.videoId))
+      JSON.stringify(resultData.filter((v) => v.isBookmark).map((v) => v.id))
     );
   }, [resultData]);
 
   const handleBookmarkChange = (video: VideoItemType) => {
     const updatedResultData = resultData.map((v) =>
-      v.id.videoId === video.id.videoId
+      v.id === video.id
         ? { ...v, isBookmark: !v.isBookmark }
         : v
     );
     setResultData(updatedResultData);
 
     const bookmarkedVideo = updatedResultData.find(
-      (v) => v.id.videoId === video.id.videoId && v.isBookmark
+      (v) => v.id === video.id && v.isBookmark
     );
     setBookmarkedIndex(bookmarkedVideo ? updatedResultData.indexOf(bookmarkedVideo) : null);
 
@@ -65,23 +59,23 @@ export default function Home({ cheNomJson }: HomeProps) {
       // Add the video ID to localStorage
       localStorage.setItem(
         'bookmarkedVideos',
-        JSON.stringify([...JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]'), video.id.videoId])
+        JSON.stringify([...JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]'), video.id])
       );
-      showToast(`"${video.snippet.title}" added to bookmarks!`, 'success');
+      showToast(`"${video.title}" added to bookmarks!`, 'success');
     } else {
       // Remove the video ID from localStorage
       localStorage.setItem(
         'bookmarkedVideos',
-        JSON.stringify(JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]').filter((id: string) => id !== video.id.videoId))
+        JSON.stringify(JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]').filter((id: string) => id !== video.id))
       );
-
-      showToast(`"${video.snippet.title}" removed from bookmarks!`, 'error');
+      
+      showToast(`"${video.title}" removed from bookmarks!`, 'error');
     }
   };
 
   const filteredResults = useMemo(() => resultData
     .filter((video) => {
-      const titleLower = video.snippet.title.toLowerCase();
+      const titleLower = video.title.toLowerCase();
       const isIncluded = titleLower.includes(searchTerm.toLowerCase());
       const isBookmarkFilter = currentFilter === 'Bookmark';
 
@@ -121,26 +115,25 @@ export default function Home({ cheNomJson }: HomeProps) {
           {hasResults ? (
             <div className="w-full sm:px-2 sm:w-auto sm:grid sm:grid-cols-2 sm:gap-4 md:gap-2 2xl:grid-cols-4 md:grid-cols-3">
               {filteredResults.map((video, index) => (
-                <InView key={video.id.videoId} triggerOnce threshold={1}>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.7 }}
-                    style={{ zIndex: bookmarkedIndex === index ? 1 : 'auto' }}
-                  >
-                    <Video
-                      video={video}
-                      onBookmarkChange={handleBookmarkChange}
-                      videoTitle={video.snippet.title}
-                      channelTitle={video.snippet.channelTitle}
-                      imgUrl={video.snippet.thumbnails.high.url}
-                      width={video.snippet.thumbnails.high.width}
-                      height={video.snippet.thumbnails.high.height}
-                      altTitle={video.snippet.title}
-                      videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                    />
-                  </motion.div>
-                </InView>
+                <motion.div
+                  key={video.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                  style={{ zIndex: bookmarkedIndex === index ? 1 : 'auto' }}
+                >
+                  <Video
+                    title={video.title}
+                    imgUrl={video.imgUrl}
+                    width={video.width}
+                    height={video.height}
+                    altTitle={video.title}
+                    videoUrl={video.videoUrl}
+                    isBookmark={video.isBookmark}
+                    video={video}
+                    onBookmarkChange={handleBookmarkChange}
+                  />
+                </motion.div>
               ))}
             </div>
           ) : (

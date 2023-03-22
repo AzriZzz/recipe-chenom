@@ -34,44 +34,21 @@ export interface SearchResult {
         publishTime: string;
     };
 }
-
-export interface IVideo {
-    videoTitle: string;
-    channelTitle: string;
-    imgUrl: string;
-    width: number;
-    height: number;
-    altTitle: string;
-    videoUrl: string;
-    // isPriority: boolean;
-    video: VideoItemType;
-    onBookmarkChange: (video: VideoItemType) => void;
-}
-
-// You also need to create the VideoItemType type
 export interface VideoItemType {
-    id: {
-        videoId: string;
-    };
-    snippet: {
-        title: string;
-        channelTitle: string;
-        thumbnails: {
-            medium: {
-                url: string;
-                width: number;
-                height: number;
-            };
-            high: {
-                url: string;
-                width: number;
-                height: number;
-            };
-        };
-    };
+    id?: string,
+    title: string,
+    videoUrl: string,
+    imgUrl: string,
+    width: number,
+    height: number,
+    altTitle: string,
     isBookmark: boolean;
 }
 
+export interface IVideo extends VideoItemType{
+    video: VideoItemType;
+    onBookmarkChange: (video: VideoItemType) => void;
+}
 export interface BookmarkProps {
     video: VideoItemType;
     onBookmarkChange: (video: VideoItemType) => void;
@@ -93,12 +70,6 @@ export interface SearchProps {
     searchTerm: string;
     setSearchTerm: (searchTerm: string) => void;
     hasResults: boolean;
-}
-
-export interface LazyImageProps {
-    src: string;
-    alt: string;
-    className?: string;
 }
 
 export interface FilterProps {
