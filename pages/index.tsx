@@ -9,10 +9,14 @@ import { filterList, meta } from '@/constants/config';
 import { VideoItemType } from '@/models/interface';
 import { cheNomJson } from '@/constants/mock';
 import { useState } from 'react';
+import { motion } from "framer-motion";
+import showToast from '@/constants/toastConfig';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentFilter, setCurrentFilter] = useState('All');
+  const [bookmarkedIndex, setBookmarkedIndex] = useState<number | null>(null);
+
 
   const [resultData, setResultData] = useState(
     cheNomJson.map((item) => ({
@@ -20,19 +24,6 @@ export default function Home() {
       isBookmark: false,
     }))
   );
-
-  const toastStyle = {
-    hideProgressBar: true,
-    autoClose: 2000,
-    position: 'bottom-right' as ToastPosition,
-  };
-
-  const showToast = (message: string, type: 'success' | 'error') => {
-    toast(message, {
-      ...toastStyle,
-      type,
-    });
-  };
 
   const handleBookmarkChange = (video: VideoItemType) => {
     const updatedResultData = resultData.map((v) =>
@@ -42,11 +33,12 @@ export default function Home() {
     );
     setResultData(updatedResultData);
 
-    const isBookmarked = (
-      updatedResultData.find((v) => v.id.videoId === video.id.videoId) ?? { isBookmark: false }
-    ).isBookmark;
+    const bookmarkedVideoIndex = updatedResultData.findIndex(
+      (v) => v.id.videoId === video.id.videoId && v.isBookmark
+    );
+    setBookmarkedIndex(bookmarkedVideoIndex);
 
-    if (isBookmarked) {
+    if (bookmarkedVideoIndex !== -1) {
       showToast(`"${video.snippet.title}" added to bookmarks!`, 'success');
     } else {
       showToast(`"${video.snippet.title}" removed from bookmarks!`, 'error');
@@ -77,7 +69,7 @@ export default function Home() {
     <Layout meta={meta}>
       <ToastContainer />
       <div className='bg-primary-backgroud-blue text-primary-dark-blue'>
-        <h1 className='flex items-center justify-center py-5 text-3xl font-bold w-1/'>
+        <h1 className='flex items-center justify-center py-5 text-2xl font-bold md:text-3xl w-1/'>
           <a target="_blank" href={youtubeLink} rel="noopener noreferrer" title={visitTitle}>
             {title}
           </a>
@@ -100,31 +92,44 @@ export default function Home() {
           {hasResults ? (
             <div className="w-full sm:px-2 sm:w-auto sm:grid sm:grid-cols-2 sm:gap-4 md:gap-4 md:grid-cols-3">
               {filteredResults.map((video, index) => (
-                <Video
+                <motion.div
                   key={video.id.videoId}
-                  video={video}
-                  onBookmarkChange={handleBookmarkChange}
-                  videoTitle={video.snippet.title}
-                  channelTitle={video.snippet.channelTitle}
-                  imgUrl={video.snippet.thumbnails.medium.url}
-                  width={video.snippet.thumbnails.medium.width}
-                  height={video.snippet.thumbnails.medium.height}
-                  altTitle={video.snippet.title}
-                  videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                  isPriority={index < 5}
-                />
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                  style={{ zIndex: bookmarkedIndex === index ? 1 : 'auto' }}
+                >
+                  <Video
+                    video={video}
+                    onBookmarkChange={handleBookmarkChange}
+                    videoTitle={video.snippet.title}
+                    channelTitle={video.snippet.channelTitle}
+                    imgUrl={video.snippet.thumbnails.medium.url}
+                    width={video.snippet.thumbnails.medium.width}
+                    height={video.snippet.thumbnails.medium.height}
+                    altTitle={video.snippet.title}
+                    videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                    isPriority={index < 5}
+                  />
+                </motion.div>
               ))}
             </div>
           ) : (
-            <div className="grid place-content-center">
-              <Image
-                src="/images/no-food.jpg"
-                alt="No food here"
-                className="relative"
-                width={300}
-                height={300}
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="grid place-content-center">
+                <Image
+                  src="/images/no-food.jpg"
+                  alt="No food here"
+                  className="relative"
+                  width={300}
+                  height={300}
+                />
+              </div>
+            </motion.div>
           )}
         </div>
       </div>
