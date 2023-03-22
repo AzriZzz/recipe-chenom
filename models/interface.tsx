@@ -62,6 +62,11 @@ export interface VideoItemType {
                 width: number;
                 height: number;
             };
+            high: {
+                url: string;
+                width: number;
+                height: number;
+            };
         };
     };
     isBookmark: boolean;

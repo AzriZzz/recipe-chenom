@@ -10,8 +10,17 @@ import { cheNomJson } from '@/constants/mock';
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from "framer-motion";
 import showToast from '@/constants/toastConfig';
+import { GetStaticProps } from 'next';
+import path from 'path';
+import fs from 'fs/promises';
+// import type { VideoItem } from '@/models/interface';
+import { fetchData } from '@/utils/fetchData'; // Update the import path if necessary
 
-export default function Home() {
+interface HomeProps {
+  cheNomJson: VideoItemType[];
+}
+
+export default function Home({ cheNomJson }: HomeProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentFilter, setCurrentFilter] = useState('All');
   const [bookmarkedIndex, setBookmarkedIndex] = useState<number | null>(null);
@@ -25,7 +34,6 @@ export default function Home() {
   useEffect(() => {
     // Load bookmark data from localStorage when the component mounts
     const bookmarkedVideos = JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]');
-    console.log(bookmarkedVideos)
     setResultData(
       cheNomJson.map((item) => ({
         ...item,
@@ -159,3 +167,13 @@ export default function Home() {
     </Layout>
   )
 }
+
+export const getServerSideProps: GetStaticProps = async () => {
+  const cheNomJson = await fetchData();
+
+  return {
+    props: {
+      cheNomJson,
+    },
+  };
+};
