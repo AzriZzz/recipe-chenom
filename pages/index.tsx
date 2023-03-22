@@ -101,7 +101,7 @@ export default function Home() {
                     height={video.snippet.thumbnails.high.height}
                     altTitle={video.snippet.title}
                     videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                    isPriority={index < 5}
+                    isPriority={index < 3}
                   />
                 </motion.div>
               ))}
