@@ -12,7 +12,7 @@ const Layout = ({ meta, children }: LayoutProps) => {
         <>
             <Head>
                 <title>{meta.title}</title>
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/mortar.ico" />
                 <meta name="robots" content="follow, index" />
                 <meta name="description" content={meta.description} />
                 <meta property="og:type" content={meta.type} />
