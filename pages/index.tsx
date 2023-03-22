@@ -159,12 +159,13 @@ export default function Home({ cheNomJson }: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const cheNomJson = await fetchData();
 
   return {
     props: {
       cheNomJson,
     },
+    revalidate: 60, 
   };
 };
