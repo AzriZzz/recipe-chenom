@@ -44,9 +44,9 @@ The main features of the project include:
 - Feature 2: Implementing a search functionality for recipe
 - Feature 3: Filtering recipe by categories
 - Feature 4: Allowing users to bookmark recipe
-- Feature 5: Connect with YouTube V3 API, fetch latest videos (pending)
-- Feature 6: Save bookmark into device localStorage to overcome problem for db stuffs (pending)
-- Feature 7: Create daily json file for latest video to save up performance (pending)
+- Feature 5: Connect with YouTube V3 API, fetch latest videos
+- Feature 6: Save bookmark into device localStorage to overcome problem for db stuffs
+- Feature 7: Create daily json file fetch latest video without having a db connection
 
 ## Usage
 
