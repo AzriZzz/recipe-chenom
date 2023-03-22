@@ -11,10 +11,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion } from "framer-motion";
 import showToast from '@/constants/toastConfig';
 import { GetStaticProps } from 'next';
-import path from 'path';
-import fs from 'fs/promises';
-// import type { VideoItem } from '@/models/interface';
 import { fetchData } from '@/utils/fetchData'; // Update the import path if necessary
+import { InView } from "react-intersection-observer";
 
 interface HomeProps {
   cheNomJson: VideoItemType[];
@@ -76,7 +74,7 @@ export default function Home({ cheNomJson }: HomeProps) {
         'bookmarkedVideos',
         JSON.stringify(JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]').filter((id: string) => id !== video.id.videoId))
       );
-      
+
       showToast(`"${video.snippet.title}" removed from bookmarks!`, 'error');
     }
   };
@@ -123,26 +121,26 @@ export default function Home({ cheNomJson }: HomeProps) {
           {hasResults ? (
             <div className="w-full sm:px-2 sm:w-auto sm:grid sm:grid-cols-2 sm:gap-4 md:gap-2 2xl:grid-cols-4 md:grid-cols-3">
               {filteredResults.map((video, index) => (
-                <motion.div
-                  key={video.id.videoId}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.7 }}
-                  style={{ zIndex: bookmarkedIndex === index ? 1 : 'auto' }}
-                >
-                  <Video
-                    video={video}
-                    onBookmarkChange={handleBookmarkChange}
-                    videoTitle={video.snippet.title}
-                    channelTitle={video.snippet.channelTitle}
-                    imgUrl={video.snippet.thumbnails.high.url}
-                    width={video.snippet.thumbnails.high.width}
-                    height={video.snippet.thumbnails.high.height}
-                    altTitle={video.snippet.title}
-                    videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                  // isPriority={index < 2}
-                  />
-                </motion.div>
+                <InView key={video.id.videoId} triggerOnce threshold={1}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.7 }}
+                    style={{ zIndex: bookmarkedIndex === index ? 1 : 'auto' }}
+                  >
+                    <Video
+                      video={video}
+                      onBookmarkChange={handleBookmarkChange}
+                      videoTitle={video.snippet.title}
+                      channelTitle={video.snippet.channelTitle}
+                      imgUrl={video.snippet.thumbnails.high.url}
+                      width={video.snippet.thumbnails.high.width}
+                      height={video.snippet.thumbnails.high.height}
+                      altTitle={video.snippet.title}
+                      videoUrl={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                    />
+                  </motion.div>
+                </InView>
               ))}
             </div>
           ) : (
