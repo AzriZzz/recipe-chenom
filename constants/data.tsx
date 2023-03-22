@@ -1,6 +1,6 @@
 export const channelName = 'CheNom'
 
-export const title = 'Resepi @CheNom';
+export const title = 'Recipe @CheNom';
 
 export const youtubeLink = 'https://www.youtube.com/@CheNom'
 
