@@ -1,25 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { IVideo } from '@/models/interface';
 import useSanitize from '@/hooks/useSanitize';
 import Image from 'next/image';
 import Bookmark from './Bookmark';
+import YouTubePlayer from './YouTubePlayer';
 
-const Video: React.FC<IVideo> = ({ 
-  title, 
-  imgUrl, 
-  width, 
-  height, 
-  altTitle, 
-  videoUrl, 
+const Video: React.FC<IVideo> = ({
+  title,
+  imgUrl,
+  width,
+  height,
+  altTitle,
+  videoUrl,
   video,
-  onBookmarkChange 
+  onBookmarkChange,
 }) => {
+  const [displayPlayer, setDisplayPlayer] = useState(false);
+  const [isTabletOrBigger, setIsTabletOrBigger] = useState(false);
+
+  useEffect(() => {
+    setIsTabletOrBigger(window.innerWidth >= 768);
+    const handleResize = () => {
+      setIsTabletOrBigger(window.innerWidth >= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const openVideo = (e: { preventDefault: () => void; }) => {
+    if (isTabletOrBigger) {
+      e.preventDefault();
+      setDisplayPlayer(true);
+    }
+  };
+
+  const closeVideo = () => {
+    setDisplayPlayer(false);
+  };
 
   return (
-    <div className="w-full md:w-[250px] h-[270px] md:h-[200px] md:p-0">
+    <div className="w-full md:w-[250px] h-[270px] md:h-[200px] md:p-0 relative">
       <div className="w-full">
-        <a href={videoUrl} target="_blank" rel="noopener noreferrer">
-          <div className="relative w-full h-[210px] md:h-[140px]  md:rounded overflow-hidden transition-transform duration-300 lg:hover:scale-105">
+        <a href={videoUrl} target="_blank" rel="noopener noreferrer" onClick={openVideo}>
+          <div className="relative w-full h-[210px] md:h-[140px] md:rounded overflow-hidden transition-transform duration-300 lg:hover:scale-105">
             <Image
               className="top-0 left-0 z-0 object-cover w-full h-full"
               src={imgUrl}
@@ -40,8 +65,9 @@ const Video: React.FC<IVideo> = ({
           </div>
         </div>
       </div>
+      {displayPlayer && <YouTubePlayer videoId={video.id} onClose={closeVideo} />}
     </div>
-  )
-}
+  );
+};
 
-export default Video
+export default Video;

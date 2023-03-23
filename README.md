@@ -38,15 +38,17 @@ npm run dev
 
 ## Features
 
-The main features of the project include:
+The primary features of the project encompass the following technical aspects:
 
-- Feature 1: Displaying all recipe from CheNom's YouTube channel
-- Feature 2: Implementing a search functionality for recipe
-- Feature 3: Filtering recipe by categories
-- Feature 4: Allowing users to bookmark recipe
-- Feature 5: Connect with YouTube V3 API, fetch latest videos
-- Feature 6: Save bookmark into device localStorage to overcome problem for db stuffs
-- Feature 7: Create daily json file fetch latest video without having a db connection
+1. Retrieval and display of all recipes from CheNom's YouTube channel using YouTube's Data API v3.
+2. Implementation of a search functionality to enable users to find specific recipes within the platform.
+3. Integration of a filtering system that allows users to categorize recipes based on specific criteria.
+4. Implementation of a bookmark feature, enabling users to save their favorite recipes for easy access.
+5. Utilization of the YouTube Data API v3 to fetch the latest video content dynamically.
+6. Storage of bookmark data in the device's local storage, mitigating the need for database management.
+7. Generation of daily JSON files to fetch the latest video content without reliance on a database connection.
+8. Embedded video playback functionality within the website for non-mobile devices, with automatic redirection to the YouTube app on mobile devices.
+
 
 ## Usage
 
