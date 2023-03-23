@@ -35,13 +35,13 @@ export interface SearchResult {
     };
 }
 export interface VideoItemType {
-    id?: string,
-    title: string,
-    videoUrl: string,
-    imgUrl: string,
-    width: number,
-    height: number,
-    altTitle: string,
+    id?: string;
+    title: string;
+    videoUrl: string;
+    imgUrl: string;
+    width: number;
+    height: number;
+    altTitle: string;
     isBookmark: boolean;
 }
 
@@ -64,6 +64,7 @@ interface Meta {
     description: string;
     type: string;
     image: string;
+    pathUrl: string
 }
 
 export interface SearchProps {

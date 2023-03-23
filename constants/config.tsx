@@ -1,8 +1,9 @@
 export const meta = {
   title: "Recipe @CheNom",
   description: "Koleksi Resepi Terbaik Malaysia.",
-  image: "https://yt3.googleusercontent.com/ytc/AL5GRJW66zx2IzqAubnIcIKxvgounlHCdvHO4xL2ZXZz=s900-c-k-c0x00ffffff-no-rj",
+  image: "/images/chenom.jpg",
   type: "website",
+  pathUrl: "https://recipe-chenom.vercel.app/"
 };
 
 export const filterList = [
