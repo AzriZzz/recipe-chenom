@@ -1,16 +1,16 @@
-import Image from 'next/image';
-import Video from '@/components/components/Video';
+import showToast from '@/constants/toastConfig';
 import Filter from '@/components/components/Filter';
 import Search from '@/components/components/Search';
 import Layout from '@/components/Layout/Layout';
-import { ToastContainer } from 'react-toastify';
-import { filterList, meta } from '@/constants/config';
-import { VideoItemType } from '@/models/interface';
+import Image from 'next/image';
+import Video from '@/components/components/Video';
 import { useEffect, useMemo, useState } from 'react';
-import { motion } from "framer-motion";
-import showToast from '@/constants/toastConfig';
+import { filterList, meta } from '@/constants/config';
 import { GetStaticProps } from 'next';
+import { ToastContainer } from 'react-toastify';
+import { VideoItemType } from '@/models/interface';
 import { fetchData } from '@/utils/fetchData'; // Update the import path if necessary
+import { motion } from "framer-motion";
 
 interface HomeProps {
   cheNomJson: VideoItemType[];

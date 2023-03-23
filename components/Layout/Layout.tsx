@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import React from 'react'
 import { LayoutProps } from '@/models/interface'
 import Header from './Header';
 import Footer from './Footer';
