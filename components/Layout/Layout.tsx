@@ -10,7 +10,9 @@ const Layout = ({ meta, children }: LayoutProps) => {
         <>
             <Head>
                 <title>{meta.title}</title>
-                <meta name="description" content="Koleksi Resepi Terbaik Malaysia." />
+                <link rel="icon" href="/mortar.ico" />
+                <meta name="robots" content="follow, index" />
+                <meta name="description" content={meta.description} />
 
                  {/* Google / Search Engine Tags  */}
                 <meta itemProp="name" content={meta.title} />
