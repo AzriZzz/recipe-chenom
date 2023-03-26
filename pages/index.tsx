@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import { VideoItemType } from '@/models/interface';
 import { fetchData } from '@/utils/fetchData'; // Update the import path if necessary
 import { motion } from "framer-motion";
+import chenomjson from '@/constants/mock';
 
 interface HomeProps {
   cheNomJson: VideoItemType[];
@@ -159,7 +160,9 @@ export default function Home({ cheNomJson }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const cheNomJson = await fetchData();
+  let isMock = true;
+
+  const cheNomJson = isMock ? chenomjson : await fetchData() ;
 
   return {
     props: {
