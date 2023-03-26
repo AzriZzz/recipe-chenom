@@ -160,8 +160,7 @@ export default function Home({ cheNomJson }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  let isMock = false;
-
+  const isMock = false;
   const cheNomJson = isMock ? chenomjson : await fetchData() ;
 
   return {
