@@ -44,17 +44,15 @@ export async function fetchData(): Promise<VideoItemType[]> {
     // Save the data to a new file
     await fs.writeFile(filePath, JSON.stringify(videos));
 
-    // Delete the file from yesterday, if it exists
-    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    const yesterdayFileName = `${yesterday}.json`;
-    const yesterdayFilePath = path.join(process.cwd(), 'data', yesterdayFileName);
+    const dataDir = path.join(process.cwd(), 'data');
+    const files = await fs.readdir(dataDir);
 
-    try {
-      await fs.unlink(yesterdayFilePath);
-    } catch (error) {
-      // Do nothing if the file does not exist
+    for (const file of files) {
+      if (file.endsWith('.json') && file !== fileName) {
+        const fileToDelete = path.join(dataDir, file);
+        await fs.unlink(fileToDelete);
+      }
     }
-
     return videos;
   }
 }
