@@ -43,6 +43,7 @@ export interface VideoItemType {
     height: number;
     altTitle: string;
     isBookmark: boolean;
+    views: number;
 }
 
 export interface IVideo extends VideoItemType{

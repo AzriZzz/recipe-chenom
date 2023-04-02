@@ -5,7 +5,7 @@ import Layout from '@/components/Layout/Layout';
 import Image from 'next/image';
 import Video from '@/components/components/Video';
 import { useEffect, useMemo, useState } from 'react';
-import { filterList, meta } from '@/constants/config';
+import { filterList, meta, tenMostPopular } from '@/constants/config';
 import { GetStaticProps } from 'next';
 import { ToastContainer } from 'react-toastify';
 import { VideoItemType } from '@/models/interface';
@@ -68,28 +68,40 @@ export default function Home({ cheNomJson }: HomeProps) {
         'bookmarkedVideos',
         JSON.stringify(JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]').filter((id: string) => id !== video.id))
       );
-      
+
       showToast(`"${video.title}" removed from bookmarks!`, 'error');
     }
   };
-
-  const filteredResults = useMemo(() => resultData
-    .filter((video) => {
-      const titleLower = video.title.toLowerCase();
-      const isIncluded = titleLower.includes(searchTerm.toLowerCase());
-      const isBookmarkFilter = currentFilter === 'Bookmark';
-
-      if (isBookmarkFilter) {
-        return isIncluded && video.isBookmark;
-      }
-
-      if (currentFilter !== 'All') {
-        return isIncluded && titleLower.includes(currentFilter.toLowerCase());
-      }
-
-      return isIncluded;
-    })
-    .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0)), [resultData, searchTerm, currentFilter]);
+  const filteredResults = useMemo(() => {
+    let filteredVideos = resultData
+      .filter((video) => {
+        const titleLower = video.title.toLowerCase();
+        const isIncluded = titleLower.includes(searchTerm.toLowerCase());
+        const isBookmarkFilter = currentFilter === 'Bookmark';
+  
+        if (isBookmarkFilter) {
+          return isIncluded && video.isBookmark;
+        }
+  
+        if (currentFilter !== 'All' && currentFilter !== tenMostPopular) {
+          return isIncluded && titleLower.includes(currentFilter.toLowerCase());
+        }
+  
+        return isIncluded;
+      });
+  
+    if (currentFilter === tenMostPopular) {
+      filteredVideos = filteredVideos
+        .sort((a, b) => (b.views - a.views))
+        .slice(0, 10);
+    } else {
+      filteredVideos = filteredVideos
+        .sort((a, b) => (b.isBookmark ? 1 : 0) - (a.isBookmark ? 1 : 0));
+    }
+  
+    return filteredVideos;
+  }, [resultData, searchTerm, currentFilter]);
+  
 
   const hasResults = filteredResults.length > 0;
 
@@ -131,6 +143,7 @@ export default function Home({ cheNomJson }: HomeProps) {
                     videoUrl={video.videoUrl}
                     isBookmark={video.isBookmark}
                     video={video}
+                    views={video.views}
                     onBookmarkChange={handleBookmarkChange}
                   />
                 </motion.div>
@@ -161,12 +174,12 @@ export default function Home({ cheNomJson }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const isMock = false;
-  const cheNomJson = isMock ? chenomjson : await fetchData() ;
+  const cheNomJson = isMock ? chenomjson : await fetchData();
 
   return {
     props: {
       cheNomJson,
     },
-    revalidate: 60, 
+    revalidate: 60,
   };
 };

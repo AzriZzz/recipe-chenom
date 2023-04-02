@@ -13,4 +13,7 @@ export const filterList = [
   'Ayam',
   'Ikan',
   'Kuih',
+  'Top 10 Most Popular!'
 ]
+
+export const tenMostPopular = 'Top 10 Most Popular!';

@@ -13,6 +13,7 @@ const Video: React.FC<IVideo> = ({
   altTitle,
   videoUrl,
   video,
+  views,
   onBookmarkChange,
 }) => {
   const [displayPlayer, setDisplayPlayer] = useState(false);

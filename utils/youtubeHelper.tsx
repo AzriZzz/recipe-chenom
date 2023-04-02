@@ -15,8 +15,7 @@ export async function getChannelId(youtube: youtube_v3.Youtube): Promise<string 
 
   return response.data.items?.[0]?.id?.channelId || null;
 }
-
-export async function getVideos(channelId: string | null | undefined = undefined): Promise<youtube_v3.Schema$SearchResult[]> {
+export async function getVideos(channelId: string | null | undefined = undefined): Promise<(youtube_v3.Schema$SearchResult & { statistics?: youtube_v3.Schema$VideoStatistics })[]> {
   if (!channelId) {
     const youtube = google.youtube({
       version: 'v3',
@@ -25,7 +24,7 @@ export async function getVideos(channelId: string | null | undefined = undefined
     channelId = await getChannelId(youtube);
   }
 
-  let allVideos: youtube_v3.Schema$SearchResult[] = [];
+  let allVideos: (youtube_v3.Schema$SearchResult & { statistics?: youtube_v3.Schema$VideoStatistics })[] = [];
   let nextPageToken: string | undefined = undefined;
 
   const youtube = google.youtube({
@@ -35,7 +34,7 @@ export async function getVideos(channelId: string | null | undefined = undefined
 
   do {
     const response: GaxiosResponse<youtube_v3.Schema$SearchListResponse> = await youtube.search.list({
-      part: ['snippet'],
+      part: ['id'],
       channelId: channelId ?? undefined,
       maxResults: 100,
       type: ['video'],
@@ -43,12 +42,25 @@ export async function getVideos(channelId: string | null | undefined = undefined
       pageToken: nextPageToken,
     });
 
-    allVideos = [...allVideos, ...(response.data.items ?? [])];
+    const videoIds = (response.data.items ?? []).map(item => item.id?.videoId).filter(Boolean) as string[];
+
+    const videoDetails = await youtube.videos.list({
+      id: videoIds,
+      part: ['snippet', 'statistics'],
+    });
+
+    const videosWithStatistics = (response.data.items ?? []).map(item => {
+      const videoDetail = videoDetails.data.items?.find(video => video.id === item.id?.videoId);
+      return {
+        ...item,
+        snippet: videoDetail?.snippet,
+        statistics: videoDetail?.statistics,
+      };
+    });
+
+    allVideos = [...allVideos, ...videosWithStatistics];
     nextPageToken = response.data.nextPageToken ?? undefined;
   } while (nextPageToken);
 
   return allVideos;
 }
-
-
-

@@ -39,6 +39,7 @@ export async function fetchData(): Promise<VideoItemType[]> {
       height: video.snippet?.thumbnails?.high?.height || 0,
       altTitle: video.snippet?.title || '',
       isBookmark: false,
+      views: parseInt(video.statistics?.viewCount ?? '0', 10),
     }));
 
     // Save the data to a new file
