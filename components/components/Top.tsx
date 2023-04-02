@@ -28,7 +28,7 @@ const Top = () => {
 
   return (
     <button
-      className={`fixed bg-neutral-silver z-30 bottom-1 right-1 md:bottom-5 md:right-5 cursor-pointer p-3 md:p-5 ${isVisible ? 'opacity-70' : 'opacity-0'
+      className={`fixed bg-neutral-silver z-30 -translate-y-10 md:translate-y-0 bottom-1 right-1 md:bottom-5 md:right-5 cursor-pointer p-3 md:p-5 ${isVisible ? 'opacity-70' : 'opacity-0'
         } transition-opacity duration-300 text-white `}
       onClick={scrollToTop}
       aria-label="Back to Top"
