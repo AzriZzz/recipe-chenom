@@ -1,3 +1,87 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
+    // Uncomment the following lines to enable eslint-config-prettier
+    // Is not enabled right now to avoid issues with the Next.js repo
+    "prettier"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "no-nested-ternary": "error",
+    "react/jsx-curly-brace-presence": "error",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/indent": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/no-unused-vars": [
+      2,
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": [
+      1,
+      {
+        "allow": ["warn"]
+      }
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            // Packages. `react` related packages come first.
+            "^react$",
+            // Next packages
+            "^next",
+            "^next/",
+            "^@?\\w",
+            // Internal packages.
+            "^(@|@plz|@company|@ui|components|utils|config|vendored-lib)(/.*|$)",
+            // Side effect imports.
+            "^\\u0000",
+            // Parent imports. Put `..` last.
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./?$",
+            // Other relative imports. Put same-folder imports and `.` last.
+            "^\\./(?=.*/)(?!/?$)",
+            "^\\.(?!/?$)",
+            "^\\./?$",
+            // Style imports.
+            "^.+\\.s?css$",
+            // Side effect imports.
+            "^\\u0000",
+            // Packages.
+            // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+            "^@?\\w",
+            // Absolute imports and other imports such as Vue-style `@/foo`.
+            // Anything not matched in another group.
+            "^",
+            // Relative imports.
+            // Anything that starts with a dot.
+            "^\\."
+          ]
+        ]
+      }
+    ],
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
 }

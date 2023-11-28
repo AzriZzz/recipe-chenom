@@ -1,5 +1,5 @@
-import { FilterProps } from '@/models/interface'
 import React from 'react'
+import { FilterProps } from '@/models/interface'
 
 const Filter: React.FC<FilterProps> = ({ data, currentFilter, setCurrentFilter }) => {
   return (

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
-import { BookmarkProps } from '@/models/interface';
+import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { InView } from 'react-intersection-observer';
+import { BookmarkProps } from '@/models/interface';
 
 const Bookmark: React.FC<BookmarkProps> = ({ video, onBookmarkChange }) => {
   const [active, setActive] = useState(false);

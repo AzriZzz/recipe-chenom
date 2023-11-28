@@ -1,6 +1,6 @@
 import { google, youtube_v3 } from 'googleapis';
-import { channelName } from '@/constants/data';
 import { GaxiosResponse } from 'googleapis-common';
+import { channelName } from '@/constants/data';
 
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBEV3_KEY;
 const CHANNEL_NAME = channelName;

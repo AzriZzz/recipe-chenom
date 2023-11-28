@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { IVideo } from '@/models/interface';
-import useSanitize from '@/hooks/useSanitize';
+import React, { useEffect,useState } from 'react';
 import Image from 'next/image';
+import useSanitize from '@/hooks/useSanitize';
+import { IVideo } from '@/models/interface';
 import Bookmark from './Bookmark';
 import YouTubePlayer from './YouTubePlayer';
 
@@ -13,7 +13,6 @@ const Video: React.FC<IVideo> = ({
   altTitle,
   videoUrl,
   video,
-  views,
   onBookmarkChange,
 }) => {
   const [displayPlayer, setDisplayPlayer] = useState(false);
@@ -52,6 +51,7 @@ const Video: React.FC<IVideo> = ({
               alt={altTitle}
               width={width}
               height={height}
+              loading="lazy"
             />
           </div>
         </a>

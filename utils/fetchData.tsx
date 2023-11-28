@@ -1,8 +1,8 @@
 import fs from 'fs/promises';
+import { google } from 'googleapis';
 import path from 'path';
 import { VideoItemType } from '@/models/interface';
 import { getChannelId, getVideos } from './youtubeHelper'; // Update the import path if necessary
-import { google } from 'googleapis';
 
 const API_KEY = process.env.NEXT_PUBLIC_YOUTUBEV3_KEY;
 

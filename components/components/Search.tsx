@@ -1,7 +1,7 @@
 // search.tsx
+import React from 'react';
 import { SEARCHPLACEHOLDER } from '@/constants/data';
 import { SearchProps } from '@/models/interface';
-import React from 'react';
 
 const Search = ({ searchTerm, setSearchTerm, hasResults }: SearchProps) => {
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

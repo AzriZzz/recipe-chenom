@@ -1,6 +1,6 @@
-import { title, visitTitle, youtubeLink } from '@/constants/data'
 import React from 'react'
 import Image from 'next/image';
+import { title, visitTitle, youtubeLink } from '@/constants/data'
 
 const Header = () => {
   return (

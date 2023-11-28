@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import YouTube, { YouTubeProps, YouTubePlayer } from 'react-youtube';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import YouTube, { YouTubePlayer,YouTubeProps } from 'react-youtube';
 
 const YouTubePlayer: React.FC<YouTubePlayer> = ({ videoId, onClose }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);

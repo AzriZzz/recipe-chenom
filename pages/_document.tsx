@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/next-script-for-ga */
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
   render() {
@@ -9,7 +9,7 @@ class MyDocument extends Document {
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-Q7YKXGM3W4"
-          ></script>
+           />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -19,7 +19,7 @@ class MyDocument extends Document {
                 gtag('config', 'G-Q7YKXGM3W4');
               `,
             }}
-          ></script>
+           />
         </Head>
         <body>
           <Main />

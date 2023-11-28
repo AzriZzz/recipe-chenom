@@ -6,7 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run type-check"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn format"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -19,12 +32,9 @@
     "@types/react-dom": "18.0.11",
     "autoprefixer": "^10.4.14",
     "dompurify": "^3.0.1",
-    "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
     "framer-motion": "^10.8.4",
     "googleapis": "^113.0.0",
     "next": "13.2.4",
-    "postcss": "^8.4.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intersection-observer": "^9.4.3",
@@ -34,6 +44,16 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
-    "@types/dompurify": "^3.0.0"
+    "@types/dompurify": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "5.42",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.3",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "postcss": "^8.4.31",
+    "prettier": "^3.1.0"
   }
 }

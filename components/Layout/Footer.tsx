@@ -1,5 +1,5 @@
-import { disclaimer, githubDescription, githubLink } from '@/constants/data'
 import React from 'react'
+import { disclaimer, githubDescription, githubLink } from '@/constants/data'
 
 const Footer = () => {
   return (
