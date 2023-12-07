@@ -26,7 +26,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'inter': ['"Inter"', 'sans-serif'],
+        'montserrat': ['"Montserrat"', 'sans-serif'],
       },
       lineHeight: {
         'clamp-2': '2.6rem',
